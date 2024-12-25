@@ -1,0 +1,855 @@
+/* Base styles (Mobile-first approach) */
+.hero-content {
+    max-width: 100%;
+    width: 100%;
+    margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: auto;
+}
+
+.hero-img {
+    display: flex;
+    justify-content: center;
+}
+
+.hero-img img {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: contain;
+    object-position: center bottom;
+}
+
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.hero-text h1 {
+    font-size: 2.4rem;
+    line-height: 3rem;
+    color: #122853;
+}
+
+.hero-text p {
+    color: #535353;
+    margin: 15px 0px;
+    max-width: 100%;
+    font-size: 1rem;
+    line-height: 1.6rem;
+    letter-spacing: 0.3px;
+}
+
+.hero-text-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-text-btns .a {
+    height: 45px;
+    padding: 0px 15px;
+    background-color: #122853;
+    color: #ffffff;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+/* Tablet Styles (min-width: 768px) */
+@media (min-width: 768px) {
+    .hero-content {
+        max-width: 90%;
+        width: 100%;
+        grid-template-columns: 1fr 1fr;
+        display: grid;
+        align-items: center;
+    }
+
+    .hero-img img {
+        max-height: 350px;
+    }
+
+    .hero-text {
+        text-align: left;
+        margin-top: 0;
+    }
+
+    .hero-text h1 {
+        font-size: 2.8rem;
+        line-height: 3.2rem;
+    }
+
+    .hero-text p {
+        max-width: 500px;
+        font-size: 1.1rem;
+        line-height: 1.8rem;
+    }
+
+    .hero-text-btns {
+        justify-content: flex-start;
+    }
+
+    .hero-text-btns .a {
+        height: 45px;
+        padding: 0 15px;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+    }
+}
+
+/* Desktop Styles (min-width: 1024px) */
+@media (min-width: 1024px) {
+    .hero-content {
+        max-width: 1200px;
+        width: 90%;
+    }
+
+    .hero-img img {
+        max-height: 450px;
+    }
+
+    .hero-text h1 {
+        font-size: 3.2rem;
+        line-height: 3.6rem;
+    }
+
+    .hero-text p {
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+    }
+}
+
+/*  */
+
+/* Base styles (Mobile-first approach) */
+.what-we-provide {
+    max-width: 100%;
+    width: 90%;
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+}
+
+.w-info-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.w-info-icon{
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    font-size: 1.4rem;
+    background-color: #ffdad4;
+    border-radius: 5px;
+}
+
+.w-info-box-1 .w-info-icon{
+    background-color: #ffdad4;
+}
+.w-info-box-2 .w-info-icon{
+    background-color: #d4ffe1;
+}
+.w-info-box-3 .w-info-icon{
+    background-color: #d4e7ff;
+}
+
+.w-info-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.w-info-text strong {
+    color: #122853;
+    font-weight: 700;
+}
+
+.w-info-text p {
+    color: #535353;
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
+}
+
+/* Tablet Styles (min-width: 768px) */
+@media (min-width: 768px) {
+    .what-we-provide {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .w-info-icon {
+        width: 55px;
+        height: 55px;
+        font-size: 1.3rem;
+        margin-right: 15px;
+    }
+
+    .w-info-text p {
+        font-size: 1rem;
+    }
+}
+
+/* Desktop Styles (min-width: 1024px) */
+@media (min-width: 1024px) {
+    .what-we-provide {
+        max-width: 1200px;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 30px;
+    }
+
+    .w-info-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.4rem;
+    }
+
+    .w-info-text p {
+        font-size: 1.1rem;
+    }
+}
+
+/* our story */
+/* Base styles (Mobile-first approach) */
+.our-story {
+    background-color: #f5f7fb;
+    max-width: 100%;
+    width: 90%;
+    margin: 80px auto;
+    border: 10px solid #ffffff;
+    box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.12);
+    display: flex;
+    flex-direction: column;
+}
+
+.our-story-img {
+    width: 100%;
+    display: flex;
+}
+
+.our-story-img img {
+    width: 100%;
+    height: auto; /* Use auto to maintain aspect ratio */
+    object-fit: cover;
+    object-position: center;
+}
+
+.our-story-text {
+    padding: 20px; /* Reduced padding for smaller screens */
+}
+
+.our-story-text h2 {
+    font-size: 2.2rem; /* Reduced font size for smaller screens */
+    color: #122853;
+    line-height: 2.5rem;
+}
+
+.our-story-text p {
+    font-size: 0.9rem;
+    color: #535353;
+    margin: 10px 0;
+    line-height: 1.4rem;
+    letter-spacing: 0.3px;
+}
+
+.s-n-box1{
+    background-color: #d4dfff;
+}
+
+.s-n-box2{
+    background-color: #d4e7ff;
+}
+
+.s-n-box3{
+    background-color: #ffd4fd;
+}
+
+.s-n-box4{
+    background-color: #d7d4ff;
+}
+
+.story-number-container {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column for smaller screens */
+    grid-gap: 10px; /* Reduced gap for smaller screens */
+    margin-top: 20px;
+}
+
+.story-number-box {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.story-number-box strong {
+    color: #122853;
+    font-weight: 700;
+    font-size: 1.4rem; /* Reduced font size for smaller screens */
+}
+
+.story-number-box span {
+    color: #535353;
+    font-size: 0.9rem;
+}
+
+/* Tablet Styles (min-width: 768px) */
+@media (min-width: 768px) {
+    .our-story {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two columns for tablets */
+    }
+
+    .our-story-text {
+        padding: 30px; /* Increased padding for better spacing */
+    }
+
+    .our-story-text h2 {
+        font-size: 2.6rem; /* Increased font size for larger screens */
+        line-height: 3rem;
+    }
+
+    .story-number-container {
+        grid-template-columns: 1fr 1fr; /* Two columns for story numbers */
+        grid-gap: 20px;
+    }
+}
+
+/* Desktop Styles (min-width: 1024px) */
+@media (min-width: 1024px) {
+    .our-story {
+        max-width: 1200px; /* Set max-width for larger screens */
+    }
+
+    .our-story-text h2 {
+        font-size: 2.8rem; /* Original font size for desktop */
+    }
+
+    .story-number-box strong {
+        font-size: 1.8rem; /* Original font size for desktop */
+    }
+}
+
+/* our services */
+/* Base styles (Mobile-first approach) */
+.our-services {
+    width: 100%;
+    background-color: #f5f7fb;
+    margin: 20px auto; /* Reduced margin for mobile */
+    padding: 30px 0; /* Reduced padding for mobile */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.services-heading {
+    display: flex;
+    flex-direction: column; /* Stack heading on small screens */
+    align-items: center; /* Center align */
+    max-width: 1200px;
+    width: 90%;
+    margin: auto;
+}
+
+.services-heading-text strong {
+    color: #014dd5;
+    font-size: 0.8rem; /* Smaller font for mobile */
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.services-heading-text h2 {
+    font-size: 1.8rem; /* Smaller font for mobile */
+    color: #122853;
+    font-weight: 700;
+    max-width: 600px;
+    text-align: center; /* Center align text */
+}
+
+.services-box-container {
+    max-width: 1200px;
+    width: 90%;
+    margin: 20px auto; /* Reduced margin for mobile */
+    display: flex;
+    flex-direction: column; /* Stack boxes vertically on mobile */
+    align-items: center; /* Center align */
+}
+
+.services-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 350px;
+    border: 5px solid #ffffff;
+    padding: 20px; /* Reduced padding for mobile */
+    margin: 10px; /* Added margin between boxes */
+    transition: border-color 0.3s; /* Add transition for hover */
+}
+
+.services-box:hover {
+    border: 5px solid #c7d0eb;
+}
+
+.services-box .i {
+    font-size: 1.5rem; /* Smaller icon size */
+    color: #122853;
+    width: 50px; /* Reduced width */
+    height: 50px; /* Reduced height */
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddaae7;
+}
+
+.services-box .strong {
+    color: #122853;
+    font-size: 1.2rem; /* Smaller strong text */
+    margin-top: 15px; /* Reduced margin */
+}
+
+.services-box p {
+    color: #122853;
+    font-size: 0.8rem; /* Smaller font size for mobile */
+    line-height: 1.4rem;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.services-box .link {
+    height: 45px;
+    background-color: #122853;
+    color: #ffffff;
+    padding: 0 10px; /* Adjusted padding */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem; /* Smaller font size for mobile */
+    font-weight: 500;
+    border-radius: 5px;
+    margin-top: 20px; /* Reduced margin for mobile */
+}
+.s-box1{
+    background-color: #ecf6fd;
+}
+.s-box1 .i{
+    background-color: #d4e2ff;
+}
+
+.s-box2{
+    background-color: #edfff3;
+}
+.s-box2 .i{
+    background-color: #d4ffe1;
+}
+.s-box3{
+    background-color: #fff0ee;
+}
+.s-box3 .i{
+    background-color: #ffdad4;
+}
+.s-box4{
+    background-color: #ecf6fd;
+}
+.s-box4 .i{
+    background-color: #faf4b8;
+}
+
+.services-help-btn {
+    color: #535353;
+    font-size: 0.8rem; /* Smaller font size for mobile */
+    margin-top: 10px;
+    text-align: center;
+    padding: 0 10px; /* Adjusted padding */
+}
+
+.services-help-btn .a {
+    color: #014dd5;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+/* Tablet Styles (min-width: 768px) */
+@media (min-width: 768px) {
+    .services-heading {
+        flex-direction: row; /* Switch to row layout */
+        justify-content: space-between; /* Distribute space */
+        align-items: center;
+    }
+
+    .services-box-container {
+        flex-direction: row; /* Change to row layout for boxes */
+        flex-wrap: wrap; /* Allow wrapping of boxes */
+        justify-content: space-between; /* Distribute space evenly */
+    }
+
+    .services-box {
+        margin: 20px; /* Increase margin for better spacing */
+    }
+
+    .services-heading-text h2 {
+        font-size: 2rem; /* Increase font size for tablets */
+    }
+}
+
+/* Desktop Styles (min-width: 1024px) */
+@media (min-width: 1024px) {
+    .our-services {
+        padding: 50px 0; /* Restore original padding */
+    }
+
+    .services-heading-text strong {
+        font-size: 0.9rem; /* Restore original font size */
+    }
+
+    .services-heading-text h2 {
+        font-size: 2.2rem; /* Restore original font size */
+    }
+
+    .services-box {
+        max-width: 350px; /* Keep original max width */
+    }
+
+    .services-box .i {
+        font-size: 2rem; /* Increase icon size */
+        width: 60px; /* Restore width */
+        height: 60px; /* Restore height */
+    }
+
+    .services-box .strong {
+        font-size: 1.4rem; /* Restore font size */
+    }
+
+    .services-box p {
+        font-size: 0.9rem; /* Restore paragraph font size */
+    }
+}
+
+
+/* Base styles (Mobile-first approach) */
+.why-choose-us {
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Stack elements on small screens */
+}
+
+.why-choose-us-left {
+    padding: 20px; /* Reduced padding for smaller screens */
+    background-color: #3c8167;
+}
+
+.why-choose-us-right {
+    padding: 20px; /* Reduced padding for smaller screens */
+    background-color: #4c71d0;
+}
+
+.why-choose-us-left h3,
+.why-choose-us-right h3 {
+    font-size: 2.2rem; /* Reduced font size for smaller screens */
+    color: #ffffff;
+    font-weight: 600;
+    line-height: 2.8rem; /* Reduced line height for smaller screens */
+}
+
+.why-choose-box-container {
+    display: flex; /* Change to flex for stacking on small screens */
+    flex-direction: column; /* Stack items vertically */
+    margin-top: 20px;
+}
+
+.why-choose-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px; /* Reduced padding for smaller screens */
+    background-color: #4a8a70;
+    margin-bottom: 10px; /* Space between boxes */
+}
+
+.why-choose-box-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.why-choose-box-text strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.why-choose-box-text p {
+    opacity: 0.7;
+    font-size: 0.9rem;
+    color: #ececec;
+}
+
+.why-choose-us-btn {
+    background-color: #1a1a1b;
+    color: #ffffff;
+    padding: 0px 10px;
+    display: flex;
+    height: 45px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    max-width: 200px;
+    margin-top: 30px;
+    font-size: 0.9rem;
+}
+
+.why-choose-us-right p {
+    color: #dfdfdf;
+    font-size: 0.8rem;
+    line-height: 1.4rem;
+    letter-spacing: 0.5px;
+    margin: 10px 0px;
+}
+
+.w-right-contact-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.w-right-contact-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.w-right-contact-box-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.w-right-contact-box-text span {
+    color: #e4e4e4;
+    font-size: 0.7rem;
+}
+
+.w-right-contact-box-text strong {
+    font-size: 1rem;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Tablet Styles (min-width: 768px) */
+@media (min-width: 768px) {
+    .why-choose-us {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr; /* Two columns for tablets */
+    }
+
+    .why-choose-us-left,
+    .why-choose-us-right {
+        padding: 30px; /* Increased padding for better spacing */
+    }
+
+    .why-choose-us-left h3,
+    .why-choose-us-right h3 {
+        font-size: 2.6rem; /* Increased font size for tablets */
+        line-height: 3.2rem; /* Increased line height for tablets */
+    }
+
+    .why-choose-box {
+        padding: 20px; /* Original padding for larger screens */
+    }
+
+    .why-choose-box-container {
+        display: grid; /* Switch back to grid for larger screens */
+        grid-template-columns: 1fr 1fr; /* Two columns */
+        grid-gap: 10px; /* Gap between boxes */
+    }
+}
+
+/* Desktop Styles (min-width: 1024px) */
+@media (min-width: 1024px) {
+    .why-choose-us {
+        max-width: 1200px; /* Set max-width for larger screens */
+        margin: 0 auto; /* Center the section */
+    }
+}
+/* Base styles (Mobile-first approach) */
+.testimonials {
+    background-color: #f5f7fb;
+    padding: 30px; /* Reduced padding for smaller screens */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.testimonials-heading {
+    max-width: 1200px;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.testimonials-heading h3 {
+    font-size: 2rem; /* Reduced font size for smaller screens */
+    color: #122853;
+}
+
+.testimonials-heading p {
+    color: #535353;
+    font-size: 0.85rem; /* Slightly reduced font size */
+    max-width: 600px;
+    line-height: 1.4rem;
+    letter-spacing: 0.5px;
+}
+
+.testimonials-content {
+    max-width: 1200px;
+    width: 90%;
+    display: flex; /* Use flex for stacking on small screens */
+    flex-direction: column; /* Stack testimonials vertically */
+    margin-top: 30px; /* Reduced margin for smaller screens */
+}
+
+.testimonials-img {
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto; /* Center image on small screens */
+    margin-bottom: 20px; /* Added space below image */
+}
+
+.testimonials-img img {
+    width: 100%;
+    max-width: 300px; /* Adjusted max width for smaller screens */
+    object-fit: contain;
+    object-position: center;
+}
+
+.testimonials-box-container {
+    margin-top: 20px; /* Reduced top margin for smaller screens */
+    overflow: hidden;
+}
+
+.testimonials-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.t-profile {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.t-profile-img {
+    width: 50px; /* Adjusted width for smaller screens */
+    height: 50px; /* Adjusted height for smaller screens */
+    border-radius: 6px;
+    background-color: #c7d0eb;
+    margin-right: 10px;
+    overflow: hidden;
+}
+
+.t-profile-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.t-profile-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.t-profile-text strong {
+    color: #122853;
+    font-size: 1rem; /* Adjusted font size for smaller screens */
+}
+
+.t-profile-text span {
+    font-size: 0.8rem; /* Adjusted font size */
+    letter-spacing: 0.3px;
+    color: #535353;
+}
+
+.testimonials-box p {
+    font-size: 0.9rem;
+    color: #122853;
+    line-height: 1.4rem;
+    letter-spacing: 0.3px;
+    margin-top: 20px; /* Adjusted margin for spacing */
+}
+
+/* Tablet Styles (min-width: 768px) */
+@media (min-width: 768px) {
+    .testimonials-content {
+        flex-direction: row; /* Switch to row layout for tablets */
+        margin-top: 50px; /* Increased top margin */
+    }
+
+    .testimonials-img {
+        margin-right: 30px; /* Restore original right margin */
+        margin-bottom: 0; /* Remove bottom margin */
+    }
+
+    .testimonials-img img {
+        max-width: 450px; /* Restore original max width */
+    }
+
+    .testimonials-heading h3 {
+        font-size: 2.4rem; /* Increased font size */
+    }
+
+    .testimonials-heading p {
+        font-size: 0.9rem; /* Increase paragraph font size */
+    }
+
+    .t-profile-img {
+        width: 70px; /* Restore original size for larger screens */
+        height: 70px;
+    }
+
+    .t-profile-text strong {
+        font-size: 1.2rem; /* Increase font size */
+    }
+}
+
+/* Desktop Styles (min-width: 1024px) */
+@media (min-width: 1024px) {
+    .testimonials {
+        padding: 50px; /* Restore original padding */
+    }
+
+    .testimonials-heading h3 {
+        font-size: 2.6rem; /* Further increased font size for large screens */
+    }
+
+    .testimonials-heading p {
+        font-size: 1rem; /* Further increased paragraph font size */
+    }
+
+    .t-profile-text strong {
+        font-size: 1.3rem; /* Further increase for desktop */
+    }
+}

@@ -1,0 +1,59 @@
+.reportContent {
+    border: 3px solid black;
+    padding: 9px;
+    box-shadow: 10px 10px 10px #888888;
+    margin: 30px;
+  }
+  
+  .reportHeader {
+    border: 0px solid black;
+    height: 150px;
+  }
+  
+  .reportBody {
+    margin-top: 80px;
+    border: 0px solid black;
+    height: 300px;
+    text-align: center;
+    font-size: 100px;
+    padding: 100px;
+    transform: rotate(-50deg);
+    color: grey;
+    text-transform: uppercase;
+  }
+  
+  .reportSign {
+    border: 0px solid black;
+    height: 100px;
+    margin: 30px 30px;
+  }
+  
+  .reportFooter {
+    border: 0px solid black;
+    height: 150px;
+  }
+  
+  img {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .labDoctorSign {
+    float: right;
+  }
+  
+  .reportSign img {
+    height: 50px;
+    width: 100px;
+    display: inline-block;
+  }
+  
+  .labInchargeSign {
+    display: inline-block;
+  }
+  
+  .alignLeft {
+    text-align: left;
+    padding: 10px;
+  }
+  

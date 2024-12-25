@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Session Complete</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body class="bg-light">
+  <div class="container my-5">
+    <div class="card shadow">
+      <div class="card-body">
+        <div class="text-center mb-4">
+          <div class="d-flex justify-content-center align-items-center mb-3">
+            <img id="docImage" class="rounded-circle me-3" width="100" height="100" alt="Doctor Image">
+            <img id="userImage" class="rounded-circle" width="50" height="50" alt="User Image">
+          </div>
+          <p id="sessionCompleteText" class="h5 fw-semibold"></p>
+          <p id="meetingDetails" class="text-muted"></p>
+        </div>
+        <div class="p-3 border rounded bg-white text-center">
+          <p id="userNameText" class="h6 mb-2"></p>
+          <p class="text-secondary">Migraines • Online visit</p>
+          <div id="slotTimeContainer" class="d-flex justify-content-center flex-wrap mb-3"></div>
+          <div class="badge bg-success text-wrap mb-3" id="statusText">Upcoming</div>
+          <button id="completeButton" class="btn btn-primary">Complete Appointment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const appointmentId = urlParams.get('appointmentId');
+      const userId = localStorage.getItem('userId'); // Get userId from localStorage
+  
+      // DOM elements
+      const statusText = document.getElementById('statusText');
+      const completeButton = document.getElementById('completeButton');
+      const docImageElem = document.getElementById('docImage');
+      const userImageElem = document.getElementById('userImage');
+      const sessionCompleteText = document.getElementById('sessionCompleteText');
+      const meetingDetails = document.getElementById('meetingDetails');
+      const userNameText = document.getElementById('userNameText');
+      const slotTimeContainer = document.getElementById('slotTimeContainer');
+  
+      if (!appointmentId || !userId) {
+        alert("Missing appointmentId or userId!");
+        return;
+      }
+  
+      try {
+        // Fetch appointment details
+        const response = await fetch(
+          `https://morgphealth.onrender.com/api/user/appointments/${userId}/${appointmentId}`
+        );
+        const appointment = await response.json();
+  
+        if (!appointment.success) {
+          alert('Failed to fetch appointment details');
+          return;
+        }
+  
+        const {
+          docName,
+          docId,
+          docImage,
+          userName,
+          userImage,
+          slotTime,
+          meetingDuration,
+          meetingStart,
+          meetingEnd,
+          status,
+        } = appointment.data;
+  
+        // Populate appointment details
+        docImageElem.src = docImage;
+        userImageElem.src = userImage;
+        sessionCompleteText.textContent = `Your session with Dr. ${docName} is complete! 🎉`;
+        meetingDetails.textContent = `Meeting Duration: ${meetingDuration} | Start: ${meetingStart} | End: ${meetingEnd}`;
+        userNameText.textContent = userName;
+        statusText.textContent = status || 'Upcoming';
+  
+        // Display slot time as individual badges
+        if (slotTime) {
+          slotTime.split('').forEach((char) => {
+            const span = document.createElement('span');
+            span.className = 'badge bg-secondary mx-1';
+            span.textContent = char;
+            slotTimeContainer.appendChild(span);
+          });
+        }
+  
+        // Handle appointment completion
+        completeButton.addEventListener('click', async () => {
+          try {
+            const response = await fetch('https://morgphealth.onrender.com/api/user/complete-appointment', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ userId, appointmentId }),
+            });
+  
+            const data = await response.json();
+            if (data.success) {
+              statusText.textContent = 'Completed';
+              statusText.classList.replace('bg-success', 'bg-info');
+  
+              const userNotification = {
+                recipientId: userId,
+                recipientType: 'User',
+                title: 'Appointment Completed',
+                message: `Your appointment with Dr. ${docName} has been completed.`,
+                read: false,
+              };
+  
+              await fetch('https://morgphealth.onrender.com/api/user/create-notification', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userNotification),
+              });
+            } else {
+              alert('Failed to complete appointment');
+            }
+          } catch (error) {
+            console.error(error);
+            alert('Error completing appointment');
+          }
+        });
+      } catch (error) {
+        console.error(error);
+        alert('Error fetching appointment details');
+      }
+    });
+  </script>
+  
+</body>
+</html>

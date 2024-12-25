@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prescription Details</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .medication {
+      background-color: #f0f0f0;
+      padding: 5px;
+      border-radius: 5px;
+      margin-bottom: 5px;
+    }
+
+    .label {
+      font-weight: bold;
+    }
+
+    .no-data-text {
+      color: #888;
+      text-align: center;
+    }
+  </style>
+
+  
+<script>
+  // Redirect to index.html if no token is found
+  if (!localStorage.getItem('userId')) {
+    window.location.href = '../index.html';
+  }
+</script>
+
+</head>
+
+<body>
+  <div class="container mt-5">
+    <div
+    id="confidentialElement"
+    class="position-absolute top-50 start-50 translate-middle text-center text-uppercase fw-bold opacity-25"
+    style="z-index: 10; pointer-events: none; font-size: 4rem; color: #ccc;"
+  >
+    <p id="confidential">Confidential</p>
+  </div>
+  
+  
+    <!-- Header Section -->
+    <div class="text-center mb-4">
+      <h2 id="hospitalName2">Hospital Name</h2>
+      <p id="addressText">Address of the hospital</p>
+    </div>
+  
+    <!-- Patient Information -->
+    <div class="mb-4">
+      <div><strong>Name:</strong> <span id="patientName">N/A</span></div>
+      <div><strong>Age:</strong> <span id="age">N/A</span></div>
+      <div><strong>Sex:</strong> <span id="sex">N/A</span></div>
+      <div><strong>Date:</strong> <span id="date">N/A</span></div>
+    </div>
+  
+    <!-- Prescription Details -->
+    <div class="mb-4">
+      <h4>Medicines:</h4>
+      <div id="drugsContainer">
+        <!-- Dynamically populated drugs list for medicines -->
+      </div>
+  
+      <h4>Dosage:</h4>
+      <p class="p"></p>
+      <div id="dosageContainer">
+        <!-- Dynamically populated dosage list for medicines -->
+      </div>
+  
+      <h4>Frequency:</h4>
+      <div id="frequencyContainer">
+        <!-- Dynamically populated frequency list for medicines -->
+      </div>
+  
+      <!-- New section for Medicines2 -->
+      <h4 id="medicines2Header" style="margin-top:30px;">Medicines (Active):</h4>
+      <div id="drugsContainer2">
+        <!-- Dynamically populated drugs list for medicines2 -->
+      </div>
+  
+      <h4 id="dosage2Header">Dosage2:</h4>
+      <div id="dosageContainer2">
+        <!-- Dynamically populated dosage list for medicines2 -->
+      </div>
+  
+      <h4 id="frequency2Header">Frequency2:</h4>
+      <div id="frequencyContainer2">
+        <!-- Dynamically populated frequency list for medicines2 -->
+      </div>
+
+      <p style="margin-top: 30px; font-size: 16; font-weight: bold; text-align: center;" id="doctorName">Dr. [Name]</p>
+      
+      
+      
+      <div style="text-align: center;" id="actionButtonContainer"></div>
+    </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const token = localStorage.getItem('authToken'); // Get the auth token from local storage
+
+      if (!token) {
+        // Redirect to login page if there is no token
+        window.location.href = '../index.html'; // Replace 'login.html' with the URL you want to redirect to
+      }
+    });
+  </script>
+
+
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    async function fetchData() {
+   const urlParams = new URLSearchParams(window.location.search);
+   const appointmentId = urlParams.get("appointmentId");
+ 
+   if (!appointmentId) {
+     alert("Appointment ID is missing in the query string!");
+     return;
+   }
+ 
+   try {
+     const response = await fetch(`http://localhost:4000/api/user/api/appointments/${appointmentId}`);
+     const data = await response.json();
+     const appointments = data.appointment;
+     console.log(appointments.updatedmedicine[0].name);
+     if (!appointments) {
+       alert("No data found for the given appointment ID.");
+       return;
+     }
+ 
+     // Populate fields from database
+     document.getElementById("hospitalName2").textContent = appointments.hospitalName2 || "N/A";
+     document.getElementById("patientName").textContent = appointments.userData.name || "N/A";
+     document.getElementById("age").textContent = appointments.age || "N/A";
+     document.getElementById("sex").textContent = appointments.userData.gender || "N/A";
+     document.getElementById("date").textContent = new Date(appointments.createdAt).toLocaleDateString() || "N/A";
+ 
+     // Destructure and prepare medication data using the provided pattern
+     const { medicines = [], updatedmedicine = [] } = appointments;  // updated 'medicines2' to 'updatedmedicine'
+ 
+     // Extract drug, dosage, and frequency using map
+     const drugString = medicines?.map(medicine => medicine.name) || [];
+     const dosageString = medicines?.map(medicine => medicine.dosage) || [];
+     const frequencyString = medicines?.map(medicine => medicine.frequency) || [];
+ // console.log(drugString)
+ console.log('Frequency List:', frequencyString); 
+ // console.log(frequencyString)
+ const drugString2 = updatedmedicine?.map(medicine => medicine.name) || [];  // updated 'medicines2' to 'updatedmedicine'
+     const dosageString2 = updatedmedicine?.map(medicine => medicine.dosage) || [];  // updated 'medicines2' to 'updatedmedicine'
+     const frequencyString2 = updatedmedicine?.map(medicine => medicine.frequency) || [];  // updated 'medicines2' to 'updatedmedicine'
+     //     console.log(drugString2)
+     // console.log(dosageString2)
+     // console.log(frequencyString2)
+     // Populate drugs, dosages, and frequencies dynamically for medicines
+     const drugsContainer = document.getElementById("drugsContainer");
+     const dosageContainer = document.getElementById("dosageContainer");
+     const frequencyContainer = document.getElementById("frequencyContainer");
+     const p = document.querySelector('.p')
+     
+     
+     
+     const drugsContainer2 = document.getElementById("drugsContainer2");
+     const dosageContainer2 = document.getElementById("dosageContainer2");
+     const frequencyContainer2 = document.getElementById("frequencyContainer2");
+     console.log(frequencyContainer2);  // Check if the container is correctly selected
+ 
+    // Ensure that drugString, dosageString, and frequencyString have corresponding entries
+ if (drugString.length > 0) {
+   drugString.forEach((drug, index) => {
+     const drugElement = document.createElement("div");
+     drugElement.classList.add("medication");
+     drugElement.textContent = (drug || "N/A").trim(); ;
+     drugsContainer.appendChild(drugElement);
+ 
+    
+     // Apply "Discontinued" tag if applicable
+     if (appointments.discontinue === true) {
+       const discontinuedTag = document.createElement("span");
+       discontinuedTag.classList.add("badge", "badge-danger");
+       discontinuedTag.textContent = "Discontinued";
+       drugElement.appendChild(discontinuedTag);
+       discontinuedTag.style.color = "red";
+       drugElement.style.opacity = "0.5";
+     }
+   });
+ } else {
+   drugsContainer.innerHTML = "<div class='no-data-text'>No drugs available.</div>";
+ }
+ 
+ // Populate dosages - use index to ensure alignment with drug
+ if (dosageString.length > 0) {
+   dosageString.forEach((dosage, index) => {
+     const dosageElement = document.createElement("div");
+     dosageElement.classList.add("medication");
+     dosageElement.textContent = (dosage || "N/A").trim(); 
+     dosageContainer.appendChild(dosageElement);
+    
+     // Apply "Discontinued" tag if applicable
+     if (appointments.discontinue === true) {
+       const discontinuedTag = document.createElement("span");
+       discontinuedTag.classList.add("badge", "badge-danger");
+       discontinuedTag.textContent = "Discontinued";
+       dosageElement.appendChild(discontinuedTag);
+       discontinuedTag.style.color = "red";
+       dosageElement.style.opacity = "0.5";
+     }
+   });
+ } else {
+   dosageContainer.innerHTML = "<div class='no-data-text'>No dosage available.</div>";
+ }
+ 
+ // Populate frequencies - use index to ensure alignment with drug and dosage
+ console.log('Frequency List:', frequencyString);  // Log frequency array
+ 
+ if (frequencyString.length > 0) {
+   frequencyString.forEach((frequency, index) => {
+     const frequencyElement = document.createElement("div");
+     frequencyElement.classList.add("medication");
+     frequencyElement.textContent = (frequency || "N/A");
+     frequencyContainer.appendChild(frequencyElement);
+ 
+    
+     if (appointments.discontinue === true) {
+       const discontinuedTag = document.createElement("span");
+       discontinuedTag.classList.add("badge", "badge-danger");
+       discontinuedTag.textContent = "Discontinued";
+       frequencyElement.appendChild(discontinuedTag);
+       discontinuedTag.style.color = "red";
+       frequencyElement.style.opacity = "0.5";
+     }
+   });
+ } else {
+   frequencyContainer.innerHTML = "<div class='no-data-text'>No frequency available.</div>";
+ }
+ 
+ 
+     // Check if discontinue2 is false
+     const discontinue2 = appointments.discontinue2;
+    
+ 
+     if (discontinue2 === false) {
+       // Show sections for updated medicines
+       document.getElementById("medicines2Header").style.display = "block";
+       document.getElementById("drugsContainer2").style.display = "block";
+       document.getElementById("dosage2Header").style.display = "block";
+       document.getElementById("dosageContainer2").style.display = "block";
+       document.getElementById("frequency2Header").style.display = "block";
+       document.getElementById("frequencyContainer2").style.display = "block";
+ 
+       // Containers for updated medicine data
+       const drugsContainer2 = document.getElementById("drugsContainer2");
+       const dosageContainer2 = document.getElementById("dosageContainer2");
+       const frequencyContainer2 = document.getElementById("frequencyContainer2");
+ 
+       // Populate updated drugs, dosages, and frequencies for updated medicine
+       if (drugString2.length > 0) {
+         drugString2.forEach((drug) => {
+           const drugElement = document.createElement("div");
+           drugElement.classList.add("medication");
+           drugElement.textContent = (drug || "N/A").trim(); ;
+           drugsContainer2.appendChild(drugElement);
+ 
+           if (appointments.discontinue2 === false) {
+             const discontinuedTag = document.createElement("span");
+             discontinuedTag.classList.add("badge", "badge-success");
+             discontinuedTag.textContent = "Active";
+             drugElement.appendChild(discontinuedTag);
+             discontinuedTag.style.color = "green";
+             drugElement.style.opacity = "0.5";
+           }
+         });
+       } else {
+         drugsContainer2.innerHTML = "<div class='no-data-text'>No drugs available.</div>";
+       }
+ 
+       // Dosage for updated medicine
+       if (dosageString2.length > 0) {
+         dosageString2.forEach((dosage) => {
+           const dosageElement = document.createElement("div");
+           dosageElement.classList.add("medication");
+           dosageElement.textContent = (dosage || "N/A").trim(); ;
+           dosageContainer2.appendChild(dosageElement);
+ 
+           if (appointments.discontinue2 === false) {
+             const discontinuedTag = document.createElement("span");
+             discontinuedTag.classList.add("badge", "badge-success");
+             discontinuedTag.textContent = "Active";
+             dosageElement.appendChild(discontinuedTag);
+             discontinuedTag.style.color = "green";
+             dosageElement.style.opacity = "0.5";
+           }
+         });
+       } else {
+         dosageContainer2.innerHTML = "<div class='no-data-text'>No dosage available.</div>";
+       }
+ 
+       // Frequency for updated medicine
+       if (frequencyString2.length > 0) {
+         frequencyString2.forEach((frequency) => {
+           const frequencyElement = document.createElement("div");
+           frequencyElement.classList.add("medication");
+           frequencyElement.textContent = (frequency || "N/A").trim(); ;
+           frequencyContainer2.appendChild(frequencyElement);
+ 
+
+           if (appointments.discontinue2 === false) {
+             const discontinuedTag = document.createElement("span");
+             discontinuedTag.classList.add("badge", "badge-success");
+             discontinuedTag.textContent = "Active";
+             frequencyElement.appendChild(discontinuedTag);
+             discontinuedTag.style.color = "green";
+             frequencyElement.style.opacity = "0.5";
+           }
+         });
+       } else {
+         frequencyContainer2.innerHTML = "<div class='no-data-text'>No frequency available.</div>";
+       }
+     } else {
+       // Hide updated medicine sections if discontinue2 is true
+       document.getElementById("medicines2Header").style.display = "none";
+       document.getElementById("drugsContainer2").style.display = "none";
+       document.getElementById("dosage2Header").style.display = "none";
+       document.getElementById("dosageContainer2").style.display = "none";
+       document.getElementById("frequency2Header").style.display = "none";
+       document.getElementById("frequencyContainer2").style.display = "none";
+     }
+ 
+   
+     // Populate doctor name
+     document.getElementById("doctorName").textContent = appointments.docData.name || "Dr. [Name]";
+     // Action based on timer
+     const timer = localStorage.getItem("timer") === "true";
+     const confidentialElement = document.getElementById("confidential");
+     const actionButtonContainer = document.getElementById("actionButtonContainer");
+     console.log(confidentialElement)
+   
+         if (timer) {
+           confidentialElement.textContent = "Confidential";
+           actionButtonContainer.innerHTML = 
+             `<button id="downloadButton" class="btn btn-primary">Download</button>`
+           ;
+   
+           document.getElementById("downloadButton").addEventListener("click", () => {
+             html2canvas(document.body, {
+               scrollX: 0,  // Capture the full page
+               scrollY: 0,  // Capture the full page
+               windowWidth: document.body.scrollWidth, // Ensure the entire page width is captured
+               windowHeight: document.body.scrollHeight, // Ensure the entire page height is captured
+               useCORS: true, // Enable Cross-Origin Resource Sharing for external images
+               backgroundColor: null // Transparent background
+             }).then((canvas) => {
+               const link = document.createElement("a");
+               link.download = `Prescription_${appointmentId}.png`;  // Naming the downloaded file
+               link.href = canvas.toDataURL("image/png");  // Convert canvas to data URL
+               link.click();  // Trigger download
+             });
+           });
+         } else {
+         
+           confidentialElement.textContent = "Expired";
+           actionButtonContainer.innerHTML = `<button id="payButton" class="btn btn-success">Pay Now</button>`;
+          const fees = 1
+           document.getElementById("payButton").addEventListener("click", async () => {
+             const stripePublicKey = document.getElementById("stripe-key").getAttribute("data-key");
+             const stripe = await loadStripe(stripePublicKey);
+   
+             try {
+               const response = await fetch("https://morgphealth.onrender.com/create-intentss", {
+                 method: "POST",
+                 headers: { "Content-Type": "application/json" },
+                 body: JSON.stringify({
+                   amount: parseInt(fees) * 100,
+                   docName: appointments.docData.name,
+                   docEmail: appointments.docData.email,
+                   userName: appointments.userData.name,
+                   userEmail: appointments.userData.email,
+                   appointmentId: appointmentId,
+                   fee: fees,
+                 }),
+               });
+   
+               const session = await response.json();
+   
+               if (session.id) {
+                 const result = await stripe.redirectToCheckout({
+                   sessionId: session.id,
+                 });
+   
+                 if (result.error) {
+                   console.error("Stripe Checkout Error:", result.error.message);
+                 }
+               } else {
+                 console.error("Session ID not received:", session);
+               }
+             } catch (error) {
+               console.error("Payment initialization failed:", error);
+             }
+           });
+         }
+       } catch (error) {
+        //  console.error("Error fetching data:", error);
+         // alert("Error fetching prescription data.");
+       }
+     }
+   
+     document.addEventListener("DOMContentLoaded", fetchData);
+   </script>
+</body>
+
+</html>
+</body>

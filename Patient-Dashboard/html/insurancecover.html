@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../assets/morgp-logo.png" />
+    <title>Insurance Details</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container mt-5" id="formContainer">
+        <center>
+            <h2>Insurance Details</h2>
+            <p id="policyno"></p>
+        </center>
+        <form>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" disabled>
+                </div>
+                <div class="col-md-6">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="location">Location</label>
+                    <input type="text" class="form-control" id="location" disabled>
+                </div>
+                <div class="col-md-6">
+                    <label for="type">Type</label>
+                    <input type="text" class="form-control" id="type" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="cover">Cover</label>
+                    <input type="text" class="form-control" id="cover" disabled>
+                </div>
+                <div class="col-md-6">
+                    <label for="policyTerm">Policy Term</label>
+                    <input type="text" class="form-control" id="policyTerm" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="price">Price</label>
+                    <input type="text" class="form-control" id="price" disabled>
+                </div>
+                <div class="col-md-6">
+                    <label for="insured">Insured</label>
+                    <input type="text" class="form-control" id="insured" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="self">Self</label>
+                    <input type="text" class="form-control" id="self" disabled>
+                </div>
+                <div class="col-md-6">
+                    <label for="spouse">Spouse</label>
+                    <input type="text" class="form-control" id="spouse" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="motherAge">Mother's Age</label>
+                    <input type="text" class="form-control" id="motherAge" disabled>
+                </div>
+                <div class="col-md-6">
+                    <label for="child">Child</label>
+                    <input type="text" class="form-control" id="child" disabled>
+                </div>
+            </div>
+            <button type="button" id="downloadBtn" class="btn btn-primary">Download</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const insuranceId = urlParams.get('insuranceId');
+            const userId = localStorage.getItem("userId"); // Get user ID from local storage
+
+            if (!insuranceId) {
+                alert("No insurance ID provided in the query string!");
+                return;
+            }
+
+            fetch(`https://morgphealth.onrender.com/api/insurance/insurance/${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.insuranceData) {
+                        const insuranceData = data.insuranceData;
+
+                        // Check if the insurance ID matches
+                        if (insuranceData._id === insuranceId) {
+                            // Populate form with insurance data
+                            document.getElementById('name').value = insuranceData.name || '';
+                            document.getElementById('email').value = insuranceData.email || '';
+                            document.getElementById('location').value = insuranceData.location || '';
+                            document.getElementById('type').value = insuranceData.type || '';
+                            document.getElementById('cover').value = insuranceData.cover || '';
+                            document.getElementById('policyTerm').value = insuranceData.policyTerm || '';
+                            document.getElementById('price').value = `$${insuranceData.price}` || '';
+                            document.getElementById('insured').value = insuranceData.insured ? 'Yes' : 'No';
+                            document.getElementById('self').value = insuranceData.self || 'No';
+                            document.getElementById('spouse').value = insuranceData.spouse || 'No';
+                            document.getElementById('motherAge').value = insuranceData.motherAge || 'N/A';
+                            document.getElementById('child').value = insuranceData.child || 'No';
+                            const policyNo = insuranceData._id ? insuranceData._id.slice(0, 6) : '';
+                       
+                            document.getElementById('policyno').textContent = `Policy No: ${policyNo}`;
+                        } else {
+                            alert("Insurance ID does not match any record.");
+                        }
+                    }
+                })
+                .catch(error => console.error('Error fetching insurance data:', error));
+
+            // Download page as image using html2canvas
+            document.getElementById('downloadBtn').addEventListener('click', function () {
+                html2canvas(document.getElementById('formContainer')).then(function (canvas) {
+                    const link = document.createElement('a');
+                    link.href = canvas.toDataURL('image/png');
+                    link.download = 'insurance_details.png';
+                    link.click();
+                });
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+.chart-container {
+    width: 100%;  /* Set width to 100% of the parent */
+    height: 400px; /* Fixed height */
+    margin: 0 auto; /* Center the chart */
+    position: relative; /* Ensure proper positioning */
+    overflow: hidden; /* Prevent overflow */
+}
+
+
+.chart-container h2 {
+    text-align: center; /* Center the title */
+    margin-bottom: 10px; /* Add some space below the title */
+}
+
+.chart{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width:500px){
+    .chart{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+    }
+}

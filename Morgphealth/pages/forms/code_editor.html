@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from www.urbanui.com/melody/template/pages/forms/code_editor.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:08:29 GMT -->
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Morgphealth</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="../../vendors/iconfonts/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="../../vendors/css/vendor.bundle.addons.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="../../css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="../../images/morgp-logo.png" />
+</head>
+
+<body>
+  <div class="container-scroller">
+    <!-- partial:../../partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row default-layout-navbar">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo" id="dashboardLink2" href="#"><img src="../../images/morgp-logo.png"
+            alt="logo" /></a>
+        <!-- <a class="navbar-brand brand-logo-mini" href="index-2.html"><img src="images/logo-mini.svg" alt="logo" /></a> -->
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-stretch">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="fas fa-bars"></span>
+        </button>
+        <ul class="navbar-nav">
+
+        </ul>
+        <ul class="navbar-nav navbar-nav-right">
+
+
+
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <img
+                src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?t=st=1732891583~exp=1732895183~hmac=bec7d15f7ddd8474d4b01334c7b9e17e68ea4dda32624000b2e633c32b496fea&w=740"
+                alt="profile" />
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              <div class="dropdown-divider"></div>
+
+              <a class="dropdown-item" id="signoutLink">
+                <i class="fas fa-power-off text-primary"></i> Sign Out
+              </a>
+
+            </div>
+          </li>
+          <li class="nav-item nav-settings d-none d-lg-block">
+            <a class="nav-link" href="#">
+              <i class="fas fa-ellipsis-h"></i>
+            </a>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+          data-toggle="offcanvas">
+          <span class="fas fa-bars"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:../../partials/_settings-panel.html -->
+      <div class="theme-setting-wrapper">
+        <div id="settings-trigger"><i class="fas fa-fill-drip"></i></div>
+        <div id="theme-settings" class="settings-panel">
+          <i class="settings-close fa fa-times"></i>
+          <p class="settings-heading">SIDEBAR SKINS</p>
+          <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
+          <p class="settings-heading mt-2">HEADER SKINS</p>
+          <div class="color-tiles mx-0 px-4">
+            <div class="tiles primary"></div>
+            <div class="tiles success"></div>
+            <div class="tiles warning"></div>
+            <div class="tiles danger"></div>
+            <div class="tiles info"></div>
+            <div class="tiles dark"></div>
+            <div class="tiles default"></div>
+          </div>
+        </div>
+      </div>
+      <div id="right-sidebar" class="settings-panel">
+        <i class="settings-close fa fa-times"></i>
+        <ul class="nav nav-tabs" id="setting-panel" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab"
+              aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="setting-content">
+          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
+            aria-labelledby="todo-section">
+            <div class="add-items d-flex px-3 mb-0">
+              <form class="form w-100">
+                <div class="form-group d-flex">
+                  <input type="text" class="form-control todo-list-input" placeholder="Add To-do">
+                  <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task-todo">Add</button>
+                </div>
+              </form>
+            </div>
+            <div class="list-wrapper px-3">
+              <ul class="d-flex flex-column-reverse todo-list">
+                <li>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox">
+                      Team review meeting at 3.00 PM
+                    </label>
+                  </div>
+                  <i class="remove fa fa-times-circle"></i>
+                </li>
+                <li>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox">
+                      Prepare for presentation
+                    </label>
+                  </div>
+                  <i class="remove fa fa-times-circle"></i>
+                </li>
+                <li>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox">
+                      Resolve all the low priority tickets due today
+                    </label>
+                  </div>
+                  <i class="remove fa fa-times-circle"></i>
+                </li>
+                <li class="completed">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox" checked>
+                      Schedule meeting for next week
+                    </label>
+                  </div>
+                  <i class="remove fa fa-times-circle"></i>
+                </li>
+                <li class="completed">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox" checked>
+                      Project review
+                    </label>
+                  </div>
+                  <i class="remove fa fa-times-circle"></i>
+                </li>
+              </ul>
+            </div>
+            <div class="events-container py-4 border-bottom px-3">
+              <div class="add-event d-flex flex-column mb-2">
+                <input type="text" id="event-title" class="form-control mb-2" placeholder="Event Title">
+                <input type="text" id="event-description" class="form-control mb-2" placeholder="Event Description">
+                <input type="date" id="event-date" class="form-control mb-2" placeholder="Event Date">
+                <button class="btn btn-primary" id="add-event-btn">Add Event</button>
+              </div>
+
+              <div id="events-list">
+                <!-- Events will be dynamically inserted here -->
+              </div>
+            </div>
+
+            <!-- <div class="events py-4 border-bottom px-3">
+              <div class="wrapper d-flex mb-2">
+                <i class="fa fa-times-circle text-primary mr-2"></i>
+                <span>Feb 11 2018</span>
+              </div>
+              <p class="mb-0 font-weight-thin text-gray">Creating component page</p>
+              <p class="text-gray mb-0">build a js based app</p>
+            </div> -->
+            <div class="events pt-4 px-3">
+              <div class="wrapper d-flex mb-2">
+                <i class="fa fa-times-circle text-primary mr-2"></i>
+                <span>Feb 7 2018</span>
+              </div>
+              <p class="mb-0 font-weight-thin text-gray">Meeting with Alisa</p>
+              <p class="text-gray mb-0 ">Call Sarah Graves</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- partial -->
+      <!-- partial:../../partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item nav-profile">
+            <div class="nav-link">
+              <div class="profile-image">
+                <img
+                  src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?t=st=1732891583~exp=1732895183~hmac=bec7d15f7ddd8474d4b01334c7b9e17e68ea4dda32624000b2e633c32b496fea&w=740"
+                  alt="image" />
+              </div>
+              <div class="profile-name">
+                <p class="name">
+
+                </p>
+                <p class="designation">
+
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="dashboardLink">
+              <i class="fa fa-home menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+        
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false" aria-controls="page-layouts">
+              <i class="fab fa-trello menu-icon"></i>
+              <span class="menu-title">Page Layouts</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="page-layouts">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="../layout/boxed-layout.html">Boxed</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../layout/rtl-layout.html">RTL</a></li>
+                <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="../layout/horizontal-menu.html">Horizontal Menu</a></li>
+              </ul>
+            </div>
+          </li>
+      
+      
+      
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+              <i class="fab fa-wpforms menu-icon"></i>
+              <span class="menu-title">Form elements</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="basic_elements.html">Staff Form</a></li>                
+                <!-- <li class="nav-item"><a class="nav-link" href="advanced_elements.html">Advanced Elements</a></li> -->
+                <li class="nav-item"><a class="nav-link" href="validation.html">Blog Form </a></li>
+                <!-- <li class="nav-item"><a class="nav-link" href="wizard.html">Wizard</a></li> -->
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#editors" aria-expanded="false" aria-controls="editors">
+              <i class="fas fa-pen-square menu-icon"></i>
+              <span class="menu-title">Editors</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="editors">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="text_editor.html">Text editors</a></li>
+                <li class="nav-item"><a class="nav-link" href="code_editor.html">Code editors</a></li>
+              </ul>
+            </div>
+          </li>
+        
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+              <i class="fas fa-table menu-icon"></i>
+              <span class="menu-title">Data</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="../tables/basic-table.html">Basic table</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../tables/data-table.html">Users table</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../tables/js-grid.html">Doctors</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../tables/sortable-table.html">Appointment table</a></li>
+              </ul>
+            </div>
+          </li>
+        
+   
+        </ul>
+      </nav>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title">
+                Code editors
+            </h3>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Editors</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Code editors</li>
+                </ol>
+            </nav>
+          </div>
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Ace Editor</h4>
+                  <div class="row">
+                    <div class="col-md-6 grid-margin">
+                      <h5 class="card-subtitle">HTML Mode</h5>
+<textarea id="ace_html" class="ace-editor w-100">
+
+<!-- Default panel -->
+<div class="panel panel-default">
+<div class="panel-heading">
+<h5 class="panel-title">
+Panel Title
+<span class="text-semibold">Default</span>
+<small>Full featured toolbar</small>
+</h5>
+
+<ul class="panel-heading-icons">
+<li><a href="#" data-panel="collapse"><i class="icon-arrow-down2"></i></a></li>
+<li><a href="#" data-panel="reload"><i class="icon-reload"></i></a></li>
+<li><a href="#" data-panel="move"><i class="icon-move"></i></a></li>
+<li><a href="#" data-panel="close"><i class="icon-close"></i></a></li>
+</ul>
+</div>
+
+<div class="panel-body">
+Panel body
+</div>
+</div>
+<!-- /default panel -->
+
+</textarea>
+                    </div>
+                    <div class="col-md-6 grid-margin">
+                      <h5 class="card-subtitle">Javascript Mode</h5>
+<textarea id="ace_javaScript" class="ace-editor w-100">
+
+/**
+* In fact, you're looking at ACE right now. Go ahead and play with it!
+*
+* We are currently showing off the JavaScript mode. ACE has support for 45
+* language modes and 24 color themes!
+*/
+
+function add(x, y) {
+var resultString = "Hello, ACE! The result of your math is: ";
+var result = x + y;
+return resultString + result;
+}
+
+var addResult = add(3, 2);
+console.log(addResult);
+
+</textarea>
+                    </div>
+                    <div class="col-md-6 grid-margin">
+                      <h5 class="card-subtitle">CSS Mode</h5>
+<textarea id="ace_css" class="ace-editor w-100">
+
+.nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav li {
+  display: inline-block;
+}
+
+.nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+</textarea>
+                    </div>
+                    <div class="col-md-6 grid-margin">
+                      <h5 class="card-subtitle">SCSS Mode</h5>
+<textarea id="ace_scss" class="ace-editor w-100">
+
+.nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: inline-block;
+  }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+</textarea>
+                    </div>
+                    <div class="col-md-6 grid-margin">
+                      <h5 class="card-subtitle">Json Mode</h5>
+<textarea id="ace_json" class="ace-editor w-100">
+
+{
+  "firstName": "John",
+  "lastName": "Smith",
+  "isAlive": true,
+  "age": 27,
+  "address": {
+  "streetAddress": "21 2nd Street",
+  "city": "New York",
+  "state": "NY",
+  "postalCode": "10021-3100"
+  },
+  "phoneNumbers": [
+    {
+      "type": "home",
+      "number": "212 555-1234"
+    },
+    {
+      "type": "office",
+      "number": "646 555-4567"
+    },
+    {
+      "type": "mobile",
+      "number": "123 456-7890"
+    }
+  ],
+  "children": [],
+  "spouse": null
+}
+
+</textarea>
+                    </div>
+                    <div class="col-md-6 grid-margin">
+                      <h5 class="card-subtitle">PHP Mode</h5>
+<textarea id="ace_php" class="ace-editor w-100">
+
+<?php
+
+  function nfact($n) {
+    if ($n == 0) {
+      return 1;
+    }
+    else {
+      return $n * nfact($n - 1);
+    }
+  }
+
+  echo "\n\nPlease enter a whole number ... ";
+  $num = trim(fgets(STDIN));
+
+
+  // ===== PROCESS - Determing the factorial of the input number =====
+
+  $output = "\n\nFactorial " . $num . " = " . nfact($num) . "\n\n";
+  echo $output;
+
+?>
+
+</textarea>
+                    </div>
+                    <div class="col-md-6 grid-margin">
+                      <h5 class="card-subtitle">Coffee Mode</h5>
+<textarea id="ace_coffee" class="ace-editor w-100">
+
+  #!/usr/bin/env coffee
+
+  try
+  throw URIError decodeURI(0xC0ffee * 123456.7e-8 / .9)
+  catch e
+  console.log 'qstring' + "qqstring" + '''
+  qdoc
+  ''' + """
+  qqdoc
+  """
+
+  do ->
+  ###
+  herecommend
+  ###
+  re = /regex/imgy.test ///
+  heregex  # comment
+  ///imgy
+  this isnt: `just JavaScript`
+  undefined
+
+  sentence = "#{ 22 / 7 } is a decent approximation of π"
+
+</textarea>
+                    </div>
+                    <div class="col-md-6">
+                      <h5 class="card-subtitle">Ruby Mode</h5>
+<textarea id="ace_ruby" class="ace-editor w-100">
+
+#!/usr/bin/ruby
+
+  #
+  Program to find the factorial of a number
+  def fact(n)
+  if n == 0
+  1
+  else
+      n * fact(n - 1)
+  end
+  end
+
+  puts fact(ARGV[0].to_i)
+
+  class Range
+  def to_json( * a) {
+      'json_class' => self.class.name, # = 'Range'
+      'data' => [first, last, exclude_end ? ]
+  }.to_json( * a)
+  end
+  end
+
+  {: id => 34, : key => "value"
+  }
+
+
+  herDocs = [ << 'FOO', << BAR, << -BAZ, << -`EXEC`]# comment
+  FOO# {
+      literal
+  }
+  FOO
+  BAR# {
+      fact(10)
+  }
+  BAR
+  BAZ indented
+  BAZ
+  echo hi
+  EXEC
+  puts herDocs
+
+</textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Code mirror</h4>
+                  <div class="row">
+                    <div class="col-md-6 grid-margin">
+                      <h5 class="card-subtitle">Code Editable</h5>
+<textarea rows="4" cols="50" name="code-editable" id="code-editable">
+
+<!-- Create a simple CodeMirror instance -->
+<link rel="stylesheet" href="http://www.urbanui.com/">
+<script src="http://www.urbanui.com/"></script>
+<script>
+var editor = CodeMirror.fromTextArea(myTextarea, {
+  lineNumbers: true
+});
+</script>
+
+</textarea>
+                    </div>
+                    <div class="col-md-6 grid-margin">
+                      <h5 class="card-subtitle">Shell Mode</h5>
+<textarea class="shell-mode" rows="4" cols="50">
+
+  #!/bin/bash
+
+  # clone the repository
+  git clone http://github.com/garden/tree
+
+  # generate HTTPS credentials
+  cd tree
+  openssl genrsa -aes256 -out https.key 1024
+
+</textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2024 Morgphealth.
+              All rights reserved.</span>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const token = localStorage.getItem('authToken'); // Get the auth token from local storage
+
+      if (!token) {
+        // Redirect to login page if there is no token
+        window.location.href = 'index.html'; // Replace 'login.html' with the URL you want to redirect to
+      }
+    });
+  </script>
+  <script>
+    // Get DOM elements
+    const todoInput = document.querySelector('.todo-list-input');
+    const todoList = document.querySelector('.todo-list');
+    const addButton = document.getElementById('add-task-todo');
+
+    // Load existing tasks from local storage
+    function loadTasks() {
+      const tasks = JSON.parse(localStorage.getItem('todoList')) || [];
+      todoList.innerHTML = tasks
+        .map(
+          (task, index) => `
+          <li>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="checkbox" type="checkbox" ${task.completed ? 'checked' : ''}>
+                ${task.text}
+              </label>
+            </div>
+            <i class="remove fa fa-times-circle" data-index="${index}"></i>
+          </li>
+        `
+        )
+        .join('');
+    }
+
+    // Add a task to the list and save to local storage
+    function addTask(event) {
+      event.preventDefault();
+      const taskText = todoInput.value.trim();
+      if (taskText === '') return;
+
+      const tasks = JSON.parse(localStorage.getItem('todoList')) || [];
+      tasks.push({ text: taskText, completed: false });
+      localStorage.setItem('todoList', JSON.stringify(tasks));
+      todoInput.value = ''; // Clear the input field
+      loadTasks(); // Reload the task list
+    }
+
+    // Remove a task from the list and local storage
+    function removeTask(event) {
+      if (event.target.classList.contains('remove')) {
+        const taskIndex = event.target.getAttribute('data-index');
+        const tasks = JSON.parse(localStorage.getItem('todoList')) || [];
+        tasks.splice(taskIndex, 1);
+        localStorage.setItem('todoList', JSON.stringify(tasks));
+        loadTasks(); // Reload the task list
+      }
+    }
+
+    // Event listeners
+    addButton.addEventListener('click', addTask);
+    todoList.addEventListener('click', removeTask);
+
+    // Load tasks from local storage on page load
+    loadTasks();
+  </script>
+  <script>
+    // DOM elements
+    const eventTitleInput = document.getElementById('event-title');
+    const eventDescriptionInput = document.getElementById('event-description');
+    const eventDateInput = document.getElementById('event-date');
+    const addEventButton = document.getElementById('add-event-btn');
+    const eventsListContainer = document.getElementById('events-list');
+
+    // Load existing events from local storage
+    function loadEvents() {
+      const events = JSON.parse(localStorage.getItem('events')) || [];
+      eventsListContainer.innerHTML = events
+        .map(
+          (event, index) => `
+          <div class="events py-4 border-bottom px-3" data-index="${index}">
+            <div class="wrapper d-flex mb-2">
+              <i class="fa fa-times-circle text-primary mr-2 delete-event" data-index="${index}"></i>
+              <span>${event.date}</span>
+            </div>
+            <p class="mb-0 font-weight-thin text-gray">${event.title}</p>
+            <p class="text-gray mb-0">${event.description}</p>
+          </div>
+        `
+        )
+        .join('');
+    }
+
+    // Add event to the list and local storage
+    function addEvent(event) {
+      event.preventDefault();
+
+      const title = eventTitleInput.value.trim();
+      const description = eventDescriptionInput.value.trim();
+      const date = eventDateInput.value.trim();
+
+      if (!title || !description || !date) return;
+
+      const newEvent = { title, description, date };
+
+      // Save event to local storage
+      const events = JSON.parse(localStorage.getItem('events')) || [];
+      events.push(newEvent);
+      localStorage.setItem('events', JSON.stringify(events));
+
+      // Clear inputs
+      eventTitleInput.value = '';
+      eventDescriptionInput.value = '';
+      eventDateInput.value = '';
+
+      // Reload events
+      loadEvents();
+    }
+
+    // Remove event from the list and local storage
+    function removeEvent(event) {
+      if (event.target.classList.contains('delete-event')) {
+        const eventIndex = event.target.getAttribute('data-index');
+        const events = JSON.parse(localStorage.getItem('events')) || [];
+        events.splice(eventIndex, 1);
+        localStorage.setItem('events', JSON.stringify(events));
+        loadEvents(); // Reload the event list after deletion
+      }
+    }
+
+    // Event listeners
+    addEventButton.addEventListener('click', addEvent);
+    eventsListContainer.addEventListener('click', removeEvent);
+
+    // Load events on page load
+    loadEvents();
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Get the staffId from localStorage
+      const staffId = localStorage.getItem('staffId');
+
+      if (staffId) {
+        // Find the dashboard link and update its href with the staffId
+        const dashboardLink = document.getElementById('dashboardLink');
+        dashboardLink.href = `../../index-2.html?staffId=${staffId}`;
+        const dashboardLink2 = document.getElementById('dashboardLink2');
+        dashboardLink2.href = `../../index-2.html?staffId=${staffId}`;
+      } else {
+        // If no staffId found in localStorage, show an alert or handle accordingly
+        console.log('No staffId found in localStorage');
+      }
+    });
+
+  </script>
+
+  <script>
+    document.getElementById('signoutLink').addEventListener('click', async function (event) {
+      event.preventDefault();  // Prevent the default behavior of the link
+
+      // Get the staffId from the query string of the current URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const staffId = urlParams.get('staffId'); // Retrieve the staffId from the query parameters
+
+      if (!staffId) {
+        alert("Staff ID not found in the URL");
+        return;
+      }
+
+      try {
+        // Make the POST request to the backend to log out and save the online duration
+        const response = await fetch(`http://localhost:4000/api/admin/logout/${staffId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            // You might need to add authorization headers depending on your authentication method
+            // 'Authorization': 'Bearer ' + token
+          },
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          // Handle successful logout (e.g., redirect to login page, show success message)
+          localStorage.removeItem('authToken');
+          localStorage.removeItem('staffId'); // Optional: Remove the staff ID if you stored it
+
+          // console.log('Logged out successfully');
+          window.location.href = 'index.html'; // Redirect to login page or other action
+        } else {
+          // Handle error (e.g., show an alert or message)
+          alert('Error logging out: ' + data.message);
+        }
+      } catch (error) {
+        console.error('Error during logout:', error);
+        alert('Server error occurred during logout');
+      }
+    });
+  </script>
+
+
+  <!-- plugins:js -->
+  <script src="../../vendors/js/vendor.bundle.base.js"></script>
+  <script src="../../vendors/js/vendor.bundle.addons.js"></script>
+  <!-- endinject -->
+  <!--plugin js for this page -->
+  <script src="../../vendors/ace-builds/src-min/ace.js"></script>
+  <!-- end plugin js for this page -->
+  <!-- inject:js -->
+  <script src="../../js/off-canvas.js"></script>
+  <script src="../../js/hoverable-collapse.js"></script>
+  <script src="../../js/misc.js"></script>
+  <script src="../../js/settings.js"></script>
+  <script src="../../js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="../../js/codeEditor.js"></script>
+  <!-- End custom js for this page-->
+</body>
+
+
+<!-- Mirrored from www.urbanui.com/melody/template/pages/forms/code_editor.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:08:32 GMT -->
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="../assets/morgp-logo.png" />
+  <title>Video Call</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: black;
+      color: white;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .inner-container {
+      text-align: center;
+    }
+
+    .text {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .profile-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="inner-container">
+      <p id="statusText" class="text">Loading...</p>
+      <img id="userImage" class="profile-img" src="" alt="User Image">
+      <h3 id="userName"></h3>
+      <img id="docImage" class="profile-img" src="" alt="Doctor Image">
+      <h3 id="docName"></h3>
+      <p id="slotTime"></p>
+      <button id="joinButton" class="btn btn-primary">Join Now</button>
+    </div>
+  </div>
+
+
+
+ 
+  <script>
+    // Redirect to index.html if no token is found
+    if (!localStorage.getItem('userId')) {
+      window.location.href = '../index.html';
+    }
+  </script>
+
+  
+  <!-- Bootstrap 5 JS (for handling button click) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    let userName = ''; // Declare userName as a global variable
+  
+    document.addEventListener('DOMContentLoaded', function () {
+      const params = new URLSearchParams(window.location.search);
+      const appointmentId = params.get('appointmentId');
+      const userId = localStorage.getItem('userId'); // Get user ID from local storage
+      let meetingStart = null;
+      let meetingEnd = null;
+      let meetingDuration = null;
+  
+      if (appointmentId && userId) {
+        // Fetch appointment data to get doctor details
+        axios
+          .get(`https://morgphealth.onrender.com/api/user/appointments/${userId}`)
+          .then((response) => {
+            const appointment = response.data.appointments.find((app) => app._id === appointmentId);
+            if (appointment) {
+              const { slotTime } = appointment;
+              document.getElementById('slotTime').textContent = `Slot Time: ${slotTime}`;
+              document.getElementById('docImage').src = appointment.docData.image;
+              document.getElementById('docName').textContent = appointment.docData.name;
+              document.getElementById('userImage').src = appointment.userData.image;
+              document.getElementById('userName').textContent = appointment.userData.name;
+              userName = appointment.userData.name;
+  
+              // Capture the meeting start time
+              meetingStart = new Date();
+            }
+          })
+          .catch((error) => {
+            console.error('Error fetching appointment data:', error);
+          });
+  
+        // Handle the join button
+        const joinButton = document.getElementById('joinButton');
+        joinButton.addEventListener('click', function () {
+          const jitsiMeetUrl = `https://meet.jit.si/${appointmentId}?userInfo.displayName=${userName}`;
+          window.open(jitsiMeetUrl); // Open video call in the current tab
+        });
+  
+        // Handle the end meeting button
+        const endMeetingButton = document.getElementById('endMeetingButton');
+        endMeetingButton.addEventListener('click', async function () {
+          try {
+            // Capture the meeting end time and calculate the duration
+            meetingEnd = new Date();
+            meetingDuration = Math.floor((meetingEnd - meetingStart) / 1000); // Duration in seconds
+  
+            // Prepare data for the backend
+            const updateData = { appointmentId };
+            if (meetingStart) updateData.meetingStart = meetingStart;
+            if (meetingEnd) updateData.meetingEnd = meetingEnd;
+            if (meetingDuration) updateData.meetingDuration = meetingDuration;
+  
+            // Update the appointment in the backend
+            await axios.put(
+              `https://morgphealth.onrender.com/api/user/update-appointment/${appointmentId}`,
+              updateData
+            );
+  
+            // Redirect to the session complete page
+            window.location.href = `sessioncomplete.html?appointmentId=${appointmentId}`;
+          } catch (error) {
+            console.error('Error updating appointment:', error);
+            alert('Failed to end the meeting. Please try again.');
+          }
+        });
+      }
+    });
+  </script>
+  
+</body>
+
+</html>
